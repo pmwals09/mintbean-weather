@@ -6,14 +6,13 @@ const WeatherContainer = ({weather, selectedScope}) => {
 
   let weatherTiles = null
   if(selectedScope === 'current'){
-    weatherTiles = <SingleTile weather={weather[selectedScope].weather} date={weather[selectedScope].dt}/>
+    weatherTiles = <SingleTile weather={weather[selectedScope]} duration='hourly'/>
   } else {
     weatherTiles = weather[selectedScope].map((unit, i) => {
       return (
         <SingleTile
           key={i}
-          weather={unit.weather}
-          date={unit.dt}
+          weather={unit}
           duration={selectedScope === 'hourly' ? 'hourly' : 'daily'}
         />
       )
@@ -21,7 +20,7 @@ const WeatherContainer = ({weather, selectedScope}) => {
   }
 
   return (
-    <div className='grid-x'>
+    <div className='grid-x grid-margin-x align-center'>
       {weatherTiles}
   </div>
   )
