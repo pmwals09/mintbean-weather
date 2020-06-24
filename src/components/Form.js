@@ -15,7 +15,7 @@ const Form = ({field, label, fetchLocation}) => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    fetchLocation(formValues)
+    fetchLocation(formValues.fieldVal)
   }
 
   return (
