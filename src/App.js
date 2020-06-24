@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 
 import FormContainer from './containers/FormContainer'
 import ScopeButton from './components/ui/ScopeButton'
+import WeatherContainer from './containers/WeatherContainer'
 
 function App() {
   const [weather, setWeather] = useState({})
   const [loading, setLoading] = useState(true)
   const [selectedScope, setSelectedScope] = useState('current')
 
-  const availableScopes = ['current', 'minutely', 'hourly', 'daily']
+  const availableScopes = ['current', 'hourly', 'daily']
 
   const selectionButtons = availableScopes.map((scope, index) => {
     let selectedStatus = scope === selectedScope ? true : false
     return (
       <ScopeButton
-        id={scope+index}
+        key={scope+index}
         scope={scope}
         selectedStatus={selectedStatus}
         setSelectedScope={setSelectedScope}
@@ -51,12 +52,19 @@ function App() {
           />
         </div>
         {!loading &&
-        <div className="cell">
-          <div className='button-group align-center'>
-            {selectionButtons}
-          </div>
-        </div>
-
+          <>
+            <div className="cell">
+              <div className='button-group align-center'>
+                {selectionButtons}
+              </div>
+            </div>
+            <div className="cell">
+              <WeatherContainer
+                weather={weather}
+                selectedScope={selectedScope}
+              />
+            </div>
+          </>
         }
       </div>
     </div>
