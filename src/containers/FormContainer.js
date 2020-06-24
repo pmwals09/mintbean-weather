@@ -2,10 +2,10 @@ import React from 'react'
 
 import Form from '../components/Form'
 
-const FormContainer = ({field, label}) => {
+const FormContainer = ({field, label, fetchWeather}) => {
 
-  const fetchLocation = zipCode => {
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}&key=AIzaSyAw4i_9cDoT7kPLzs6FbzzWb1kZ52R_BRs`)
+  const fetchLocation = location => {
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${process.env.REACT_APP_ZIP_API_KEY}`)
     .then(response => {
       if(response.ok) {
         return response.json()
@@ -14,8 +14,10 @@ const FormContainer = ({field, label}) => {
         throw error
       }
     })
-    .then(weatherData => {
-      console.log(weatherData)
+    .then(locationData => {
+      const location = locationData.results[0].geometry.location
+      fetchWeather(location)
+      // console.log(locationData)
     })
   }
 
