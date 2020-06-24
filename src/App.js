@@ -25,7 +25,7 @@ function App() {
 
   const fetchWeather = location => {
     setLoading(true)
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lng}&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lng}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=imperial`)
     .then(response => {
       if(response.ok) {
         return response.json()
